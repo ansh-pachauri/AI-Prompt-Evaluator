@@ -17,7 +17,8 @@ interface CreditsContextValue {
 const CreditsContext = createContext<CreditsContextValue | null>(null);
 
 export function CreditsProvider({ children }: { children: React.ReactNode }) {
-  const [credits, setCredits] = useState<number>(TOTAL_CREDITS);
+  // null = not yet hydrated from localStorage (avoids flicker on refresh)
+  const [credits, setCredits] = useState<number | null>(null);
   const [showExpiredModal, setShowExpiredModal] = useState(false);
 
   // Hydrate from localStorage once on mount
@@ -26,12 +27,14 @@ export function CreditsProvider({ children }: { children: React.ReactNode }) {
     if (stored !== null) {
       const parsed = parseInt(stored, 10);
       setCredits(isNaN(parsed) ? TOTAL_CREDITS : Math.max(0, Math.min(parsed, TOTAL_CREDITS)));
+    } else {
+      setCredits(TOTAL_CREDITS);
     }
   }, []);
 
   const useCredit = useCallback(() => {
     setCredits((prev) => {
-      const next = Math.max(0, prev - 1);
+      const next = Math.max(0, (prev ?? 0) - 1);
       localStorage.setItem(STORAGE_KEY, String(next));
       if (next === 0) setShowExpiredModal(true);
       return next;
@@ -40,9 +43,12 @@ export function CreditsProvider({ children }: { children: React.ReactNode }) {
 
   const dismissModal = useCallback(() => setShowExpiredModal(false), []);
 
+  // Treat null (not yet hydrated) as TOTAL_CREDITS for context consumers
+  const resolvedCredits = credits ?? TOTAL_CREDITS;
+
   return (
     <CreditsContext.Provider
-      value={{ credits, totalCredits: TOTAL_CREDITS, hasCredits: credits > 0, showExpiredModal, dismissModal, useCredit }}
+      value={{ credits: resolvedCredits, totalCredits: TOTAL_CREDITS, hasCredits: resolvedCredits > 0, showExpiredModal, dismissModal, useCredit }}
     >
       {children}
     </CreditsContext.Provider>
