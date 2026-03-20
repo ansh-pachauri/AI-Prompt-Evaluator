@@ -1,5 +1,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+::selection {
+  background: #6366f1;
+  color: #ffffff;
+}
 
-
+body {
+  background: #f8fafc;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

@@ -35,20 +35,20 @@ export default function EvaluatePrompt() {
   const isOverLimit = charsLeft < 0;
 
   return (
-    <div className="w-full flex justify-center px-4 py-8">
+    <div className="w-full flex justify-center px-6 py-10">
       <div className="w-full max-w-3xl">
         {/* Label row */}
-        <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center justify-between mb-3">
           <label
             htmlFor="prompt-input"
-            className="text-sm font-semibold text-slate-700"
+            className="text-sm font-semibold text-slate-800"
           >
             Enter Your Prompt
           </label>
           <span
             className={`text-xs font-medium tabular-nums transition-colors ${
               isOverLimit
-                ? "text-red-500"
+                ? "text-rose-500 font-bold"
                 : charsLeft < 200
                 ? "text-amber-500"
                 : "text-slate-400"
@@ -59,7 +59,7 @@ export default function EvaluatePrompt() {
         </div>
 
         {/* Textarea + controls */}
-        <div className="relative rounded-2xl border border-slate-200 bg-white shadow-sm focus-within:border-slate-400 focus-within:ring-2 focus-within:ring-slate-100 transition-all">
+        <div className="relative rounded-2xl border border-slate-200 bg-white shadow-sm focus-within:border-indigo-300 focus-within:ring-3 focus-within:ring-indigo-50 transition-all">
           <textarea
             id="prompt-input"
             ref={textareaRef}
@@ -67,12 +67,12 @@ export default function EvaluatePrompt() {
             onChange={(e) => setValue(e.target.value.slice(0, MAX_CHARS))}
             onKeyDown={handleKeyDown}
             placeholder="Type or paste your prompt here… (Ctrl+Enter to evaluate)"
-            rows={4}
-            className="w-full resize-none rounded-2xl bg-transparent px-4 pt-4 pb-14 text-[15px] font-medium text-slate-800 placeholder:text-slate-400 outline-none leading-relaxed"
+            rows={5}
+            className="w-full resize-none rounded-2xl bg-transparent px-5 pt-5 pb-16 text-[15px] text-slate-800 placeholder:text-slate-400 outline-none leading-relaxed"
           />
 
-          {/* Bottom bar inside textarea box */}
-          <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-3 py-2 border-t border-slate-100 rounded-b-2xl bg-slate-50/80">
+          {/* Bottom bar */}
+          <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between px-4 py-3 border-t border-slate-100 rounded-b-2xl bg-slate-50/80">
             <p className="text-[11px] text-slate-400 select-none">
               Ctrl+Enter to evaluate
             </p>
@@ -90,7 +90,7 @@ export default function EvaluatePrompt() {
               <Button
                 onClick={handleSubmit}
                 disabled={!value.trim() || isFetching || isOverLimit}
-                className="h-8 px-4 rounded-xl bg-black text-white text-[13px] font-medium hover:opacity-90 transition-all flex items-center gap-1.5 disabled:opacity-40"
+                className="h-8 px-4 rounded-xl bg-gradient-to-r from-indigo-500 to-violet-600 text-white text-[13px] font-semibold hover:from-indigo-600 hover:to-violet-700 transition-all flex items-center gap-1.5 disabled:opacity-40 shadow-sm shadow-indigo-200"
               >
                 <Sparkles className="w-3.5 h-3.5" />
                 {isFetching ? "Evaluating…" : "Evaluate"}

@@ -7,17 +7,20 @@ export async function addContext(prompt: string, evaluationResult?: unknown) {
         ? `PROMPT: ${prompt}\n\nEVALUATION RESULT: ${JSON.stringify(evaluationResult, null, 2)}`
         : prompt;
         
-    await client.v1.context.add({
-        documents: [{ content }],
-        context_type: "resource",
-        source: "web-uploaded",
-        scope: "internal",
-        metadata: {
-            fileName: `prompt-${Date.now()}.txt`,
-            fileType: "text/plain",
-            lastModified: new Date().toISOString(),
-            fileSize: content.length,
-        }
-    });
-    // console.log("Context added successfully for prompt");
+    try {
+        await client.v1.context.add({
+            documents: [{ content }],
+            context_type: "resource",
+            source: "web-uploaded",
+            scope: "internal",
+            metadata: {
+                fileName: `prompt-${Date.now()}.txt`,
+                fileType: "text/plain",
+                lastModified: new Date().toISOString(),
+                fileSize: content.length,
+            }
+        });
+    } catch {
+        // Alchemyst context storage is optional — silently skip if unavailable
+    }
 }

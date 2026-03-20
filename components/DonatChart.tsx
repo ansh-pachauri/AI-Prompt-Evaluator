@@ -30,7 +30,7 @@ export const DonutChart = ({ data }: Pick<DonutChartProps, "data">) => {
           viewBox={`0 0 ${INNER_WIDTH} ${INNER_HEIGHT}`}
           width="100%"
           height="auto"
-          className="bg-white rounded-2xl p-4"
+          className="rounded-2xl border border-slate-200 p-4 bg-white shadow-sm"
           style={{ overflow: "visible", maxWidth: INNER_WIDTH }}
         >
           <g transform={`translate(${INNER_WIDTH / 2}, ${INNER_HEIGHT / 2})`}>
@@ -46,18 +46,21 @@ export const DonutChart = ({ data }: Pick<DonutChartProps, "data">) => {
             <text
               textAnchor="middle"
               dominantBaseline="middle"
-              fontSize={28}
-              fontWeight={700}
-              fill="#111827"
+              fontSize={34}
+              fontWeight={800}
+              fill="#1e293b"
+              style={{ fontFamily: "Geist, Inter, sans-serif" }}
             >
               {totalScore}
             </text>
             <text
               textAnchor="middle"
               dominantBaseline="middle"
-              dy={36}
+              dy={44}
               fontSize={12}
-              fill="#6b7280"
+              fontWeight={500}
+              fill="#94a3b8"
+              style={{ fontFamily: "Geist, Inter, sans-serif" }}
             >
               / 5.0
             </text>

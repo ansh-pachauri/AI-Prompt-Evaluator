@@ -22,7 +22,7 @@ export async function PromptEvaluator(prompt: string):Promise<EvaluationResults>
         
         const evalationPrompt = llmEvaluation(prompt, llmContext);
         
-        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
         const result = await model.generateContent(evalationPrompt);
         const responseText = result.response.text();
         

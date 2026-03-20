@@ -1,30 +1,32 @@
-"use client"
+"use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import CopyButton from "./Copybutton"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import CopyButton from "./Copybutton";
 
 export const ImprovedPrompt = ({ improvedPrompt }: { improvedPrompt: string }) => {
   return (
-    <div className="max-w-4xl mx-auto mt-8">
-      <Card className="relative overflow-hidden border border-border bg-card">
-        
+    <div className="max-w-4xl mx-auto mt-4">
+      <Card className="relative overflow-hidden border border-slate-200 bg-white shadow-sm rounded-2xl" style={{ gap: 0 }}>
+        {/* Gradient top accent */}
         <div
           aria-hidden="true"
-          className="absolute top-0 left-0 w-full h-1"
-          style={{
-            background: "linear-gradient(to right, var(--color-chart-4), var(--color-chart-5))",
-          }}
+          className="absolute top-0 left-0 w-full h-[3px] rounded-t-2xl"
+          style={{ background: "linear-gradient(to right, #6366f1, #8b5cf6)" }}
         />
-        <CardHeader className="pb-3">
-          <CardTitle className="text-lg sm:text-xl font-semibold text-foreground flex items-center justify-between gap-2">
-            <span className="text-balance">Improved Prompt</span>
+        <CardHeader className="pb-4 pt-6">
+          <CardTitle className="flex items-center justify-between gap-2">
+            <span className="text-base font-bold text-slate-900 tracking-tight">
+              Improved Prompt
+            </span>
             <CopyButton textToCopy={improvedPrompt} />
           </CardTitle>
         </CardHeader>
-        <CardContent className="pt-0">
-          <p className="text-muted-foreground leading-relaxed tracking-wide text-base">{improvedPrompt}</p>
+        <CardContent className="pt-0 pb-6">
+          <p className="text-slate-600 leading-relaxed tracking-wide text-sm">
+            {improvedPrompt}
+          </p>
         </CardContent>
       </Card>
     </div>
-  )
-}
+  );
+};

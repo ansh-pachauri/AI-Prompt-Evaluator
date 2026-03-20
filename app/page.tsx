@@ -34,15 +34,20 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-slate-50">
       <Header />
       <main className="flex-1">
         <EvaluatePrompt />
         {isFetching ? (
-          <div className="flex justify-center items-center py-20">
-            <div className="flex flex-col items-center gap-4">
+          <div className="flex justify-center items-center py-28">
+            <div className="flex flex-col items-center gap-5">
               <LoaderOne />
-              <p className="text-slate-600 font-medium animate-pulse">Evaluating your prompt…</p>
+              <div className="flex flex-col items-center gap-1">
+                <p className="text-slate-800 font-semibold text-sm">
+                  Analyzing your prompt
+                </p>
+                <p className="text-slate-400 text-xs">This may take a moment…</p>
+              </div>
             </div>
           </div>
         ) : queryError ? (
