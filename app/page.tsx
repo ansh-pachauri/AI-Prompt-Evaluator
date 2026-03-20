@@ -10,11 +10,15 @@ import { LoaderOne } from "@/components/ui/loader";
 import { useState, useEffect } from "react";
 import DiscriptionPage from "@/components/DiscriptionPage";
 import ErrorCard from "@/components/ErrorCard";
+import NoCreditsCard from "@/components/NoCreditsCard";
+import CreditsExpiredModal from "@/components/CreditsExpiredModal";
 import { QuotaExceededError } from "@/lib/GetApiData";
+import { useCredits } from "@/lib/CreditsContext";
 
 export default function Home() {
   const queryClient = useQueryClient();
   const isFetching = useIsFetching({ queryKey: ["prompt-evaluator"] });
+  const { hasCredits } = useCredits();
   const [hasData, setHasData] = useState(false);
   const [queryError, setQueryError] = useState<Error | null>(null);
 
@@ -35,6 +39,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50">
+      <CreditsExpiredModal />
       <Header />
       <main className="flex-1">
         <EvaluatePrompt />
@@ -58,6 +63,8 @@ export default function Home() {
           />
         ) : hasData ? (
           <DonutChartLegend />
+        ) : !hasCredits ? (
+          <NoCreditsCard />
         ) : (
           <DiscriptionPage />
         )}
