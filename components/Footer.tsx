@@ -8,13 +8,13 @@ export default function Footer() {
             href="https://github.com/Alchemyst-ai/awesome-saas/"
             className="text-slate-600 font-medium hover:text-indigo-600 transition-colors"
           >
-            Alchemyst AI
+            Ansh Pachauri
           </a>
           . Built with Next.js, Google Gemini &amp; D3.js.
         </p>
         <div className="flex items-center gap-1.5 text-xs text-slate-400">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          All systems operational
+          Context Memory Layer by Alchemyst AI.
         </div>
       </div>
     </footer>
