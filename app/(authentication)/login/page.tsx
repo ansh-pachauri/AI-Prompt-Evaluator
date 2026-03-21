@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/client'
 import { ArrowRight, Sparkles } from 'lucide-react'
 import Link from 'next/link'
 
+
 export default function LoginPage() {
   const supabase = createClient()
 
@@ -11,7 +12,7 @@ export default function LoginPage() {
     await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: {
-        redirectTo : "https://ai-prompt-evaluator.vercel.app/auth/callback",
+        redirectTo : `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`,
       },
     })
   }
