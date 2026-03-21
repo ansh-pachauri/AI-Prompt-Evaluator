@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, useCallback } from "react";
 
-const TOTAL_CREDITS = 2;
+const TOTAL_CREDITS = 3;
 const STORAGE_KEY = "prompt_eval_credits";
 
 interface CreditsContextValue {

@@ -53,7 +53,7 @@ export default function DonutSlice({
       <path
         d={`${slicePath}`}
         fill={colors[i % colors.length]}
-        stroke="white"
+        stroke="#09090b"
         strokeWidth={2.5}
         style={{
           filter: "drop-shadow(0px 2px 6px rgba(0,0,0,0.15))",
@@ -65,7 +65,7 @@ export default function DonutSlice({
         y1={centroid[1]}
         x2={inflexionPoint[0]}
         y2={inflexionPoint[1]}
-        stroke="#94a3b8"
+        stroke="#52525b"
         strokeWidth={1}
       />
       <line
@@ -73,7 +73,7 @@ export default function DonutSlice({
         y1={inflexionPoint[1]}
         x2={labelPosX}
         y2={inflexionPoint[1]}
-        stroke="#94a3b8"
+        stroke="#52525b"
         strokeWidth={1}
       />
       <text
@@ -83,7 +83,7 @@ export default function DonutSlice({
         dominantBaseline="middle"
         fontSize={13}
         fontWeight={500}
-        fill="#475569"
+        fill="#a1a1aa"
         style={{ fontFamily: "Geist, Inter, sans-serif" }}
       >
         {label}

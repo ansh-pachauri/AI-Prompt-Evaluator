@@ -1,13 +1,26 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@theme {
+  --color-obsidian-bg: #09090b;
+  --color-obsidian-surface: #18181b;
+  --color-electric-violet: #8b5cf6;
+}
+
 ::selection {
-  background: #6366f1;
+  background: #8b5cf6;
   color: #ffffff;
 }
 
 body {
-  background: #f8fafc;
+  background: #09090b;
+  color: #fafafa;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+/* Obsidian scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: #09090b; }
+::-webkit-scrollbar-thumb { background: #27272a; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #3f3f46; }
