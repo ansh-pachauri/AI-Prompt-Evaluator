@@ -1,8 +1,7 @@
-import { NextResponse } from 'next/server'
+import { NextResponse, type NextRequest } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
-import { cookies } from 'next/headers'
 
-export async function middleware(req: any) {
+export async function middleware(req: NextRequest) {
   const res = NextResponse.next()
 
   const supabase = createServerClient(
@@ -27,18 +26,24 @@ export async function middleware(req: any) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  const isRoot = req.nextUrl.pathname === '/';
-  const isDashboard = req.nextUrl.pathname.startsWith('/dashboard');
+  const { pathname } = req.nextUrl
+  const isRoot = pathname === '/'
+  const isDashboard = pathname.startsWith('/dashboard')
+  const isLogin = pathname.startsWith('/login')
 
   // Unauthenticated user trying to access the app → send to login
   if (!user && isDashboard) {
-    return NextResponse.redirect(new URL('/login', req.url));
+    return NextResponse.redirect(new URL('/login', req.url))
   }
 
-  // Authenticated user on the landing page → send straight to the app
-  if (user && isRoot) {
-    return NextResponse.redirect(new URL('/dashboard', req.url));
+  // Authenticated user on root or login → send straight to dashboard
+  if (user && (isRoot || isLogin)) {
+    return NextResponse.redirect(new URL('/dashboard', req.url))
   }
 
   return res
+}
+
+export const config = {
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|auth/callback|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)'],
 }
