@@ -5,7 +5,13 @@ export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get('code')
 
-  const response = NextResponse.redirect(`${origin}/dashboard`)
+  // In production behind a proxy (Vercel, etc.), request.url contains the
+  // internal URL, not the public domain. x-forwarded-host has the real host.
+  const forwardedHost = request.headers.get('x-forwarded-host')
+  const forwardedProto = request.headers.get('x-forwarded-proto') ?? 'https'
+  const baseUrl = forwardedHost ? `${forwardedProto}://${forwardedHost}` : origin
+
+  const response = NextResponse.redirect(`${baseUrl}/dashboard`)
 
   if (code) {
     const supabase = createServerClient(
