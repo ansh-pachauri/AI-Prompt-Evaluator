@@ -9,6 +9,7 @@ export default async function DashboardPage() {
     data: { user },
   } = await supabase.auth.getUser();
 
+  console.log(await supabase.auth.getUser());
   return (
     <div className="min-h-screen flex flex-col bg-zinc-950">
       <Header userEmail={user?.email ?? undefined} />
